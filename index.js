@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const {User} = require('./models/user');
 
-mongoose.connect('mongodb+srv://Filip:gn951753@movieapp.ns5nu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb+srv://Filip:UE7LK4wTdBBHdeW@movieapp.ns5nu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => console.log('DB Connected'))
 .catch(err => console.error(err));
 
