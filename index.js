@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Filip:gn951753@movieapp.ns5nu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
                                                                                                                         .then(() => console.log('DB Connected'))
