@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./config/key');
 const {User} = require('./models/user');
+const {auth} = require('./middleware/auth');
 
 
 mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -16,8 +17,15 @@ app.use(express.json());
 app.use(cookieParser());
 mongoose.set('useCreateIndex', true);
 
-app.get('/api/user/auth', (req, res) => {
-    
+app.get('/api/user/auth', auth, (req, res) => {
+    res.status(200).json({
+        _id: req._id,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        role: req.user.role
+    })
 })
 
 app.post('/api/users/register', (req, res) => {
