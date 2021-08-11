@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(cookieParser());
 mongoose.set('useCreateIndex', true);
 
+app.get('/', (req, res) => {
+    res.json({"hello": "hi hi hi"})
+});
+
 app.get('/api/user/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req._id,
