@@ -8,7 +8,7 @@ const {auth} = require('./middleware/auth');
 
 
 mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true,  useFindAndModify: false })
-.then(() => console.log('DB Connected'))
+.then(() => console.log('MongoDB Connected'))
 .catch(err => console.error(err));
 
 
@@ -68,4 +68,8 @@ app.get('/api/users/logout', auth, (req, res) => {
 })
 
 
-app.listen(5000);
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+    console.log('Server running at port ' + port);
+});
