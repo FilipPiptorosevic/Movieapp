@@ -17,11 +17,8 @@ app.use(express.json());
 app.use(cookieParser());
 mongoose.set('useCreateIndex', true);
 
-app.get('/', (req, res) => {
-    res.json({"hello": "hi hi hi"})
-});
 
-app.get('/api/user/auth', auth, (req, res) => {
+app.get('/api/users/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req._id,
         isAuth: true,
@@ -45,7 +42,7 @@ app.post('/api/users/register', (req, res) => {
     });
 });
 
-app.post('/api/user/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
 
     User.findOne({email: req.body.email}, (err, user) => {
         if(!user) return res.json({loginSuccess: false, message: "Email not found"});
