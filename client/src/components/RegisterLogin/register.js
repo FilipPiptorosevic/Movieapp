@@ -18,7 +18,8 @@ export class Register extends Component {
     }
 
     displayErrors = errors => 
-        errors.map((error, i) => <p key={i}>{error}</p>);
+        errors.map((error, i) => <p id="err" key={i}>{error}</p>);
+    
 
     isFormEmpty = ({ lastname, name, email, password, passwordConfirmation }) => {
         return (
@@ -31,15 +32,13 @@ export class Register extends Component {
     }
 
     isValidForm = () => {
-        let errors = [];
-        let error;
+        this.setState({errors: []});
+
 
         if(this.isFormEmpty(this.state)) {
-            error = {message: "Fill in all fields."};
-            this.setState({errors: errors.concat(error)});
+            this.setState({errors: this.state.errors.concat("Fill in all fields.")});
         } else if (!this.isValidPassword(this.state)) {
-            error = {message: "Invalid password."};
-            this.setState({errors: errors.concat(error)});
+            this.setState({errors: this.state.errors.concat("Invalid password.")});
         } else {
             return true;
         }
@@ -84,14 +83,12 @@ export class Register extends Component {
             console.log("Form is not valid");
         }
     }
-
-
     render() {
         return (
             <div className="container">
             <h2>Sign Up</h2>
             <div className="row">
-                <form className="col s12" /*onSubmit={event => this.submitForm(event)}*/>
+                <form className="col s12">
                     <div className="row">
                         <div className="input-field col s12">
                             <input
@@ -158,7 +155,7 @@ export class Register extends Component {
                                     type = "password"
                                     className = "validate"
                                 />
-                                <label for="password">Password</label>
+                                <label htmlFor="password">Password</label>
                             </div>
                         </div>
 
@@ -172,15 +169,15 @@ export class Register extends Component {
                                     type = "password"
                                     className = "validate"
                                 />
-                                <label for="passwordConfirmation">Password confirmation</label>
+                                <label htmlFor="passwordConfirmation">Password confirmation</label>
                             </div>
                         </div>
 
-                    {this.state.errors.length > 0 && (
-                        <div>
-                            {this.displayErrors(this.state.errors)}
-                        </div>
-                    )}
+                        {this.state.errors.length > 0 && (
+                            <div>
+                                {this.displayErrors(this.state.errors)}
+                            </div>
+                        )}
 
                     <div className="row">
                         <div className="col 12">
