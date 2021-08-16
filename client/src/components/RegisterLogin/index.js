@@ -45,16 +45,14 @@ class RegisterLogin extends Component {
             this.setState({errors: this.state.errors.concat("Form is not valid.")});
         }
 
-       
-
     }
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{backgroundColor: "rgb(251, 238, 193)", borderRadius: "5%"}}>
                 <h2>Log In</h2>
-                <div className="row">
-                    <form className="col s12" /*onSubmit={event => this.submitForm(event)}*/>
+                <div className="row" style={{backgroundColor:"white"}}>
+                    <form className="col s6">
                         <div className="row">
                             <div className="input-field col s12">
                                 <input
@@ -65,7 +63,7 @@ class RegisterLogin extends Component {
                                     type = "email"
                                     className = "validate"
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label className="active" htmlFor="email">Email</label>
                                 <span 
                                     className="helper-text"
                                     data-error="Type a right email type"
@@ -83,7 +81,7 @@ class RegisterLogin extends Component {
                                     type = "password"
                                     className = "validate"
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label className="active" htmlFor="password">Password</label>
                                 <span 
                                     className="helper-text"
                                     data-error="Wrong"
@@ -110,7 +108,7 @@ class RegisterLogin extends Component {
                                 </button>&nbsp; &nbsp;
                                 <Link to="/register">
                                     <button
-                                        className="btn waves-effect red lighten-2"
+                                        className="btn waves-effect green lighten-2"
                                         type="submit"
                                         name="action"
                                     >
