@@ -10,8 +10,8 @@ function App() {
       <Switch>
         <Route path ="/login" component = {Login} />
         <Route path ="/register" component = {Register} />
-        <Route path = "/" component = {HomePage} />
         <Route path = "/movie/:movieID" component = {MovieDetail} />
+        <Route path = "/" component = {HomePage} />
       </Switch>
     </div>
   );
