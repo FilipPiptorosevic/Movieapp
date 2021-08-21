@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {API_URL, API_KEY, IMAGE_URL} from '../config';
+import {API_URL, API_KEY, IMAGE_URL, BACKDROP_SIZE } from '../config';
 import MainImage from '../homepage/sections/MainImage'
 import 'antd/dist/antd.css';
 import { Descriptions, Button, Row } from 'antd';
@@ -24,7 +24,6 @@ function MovieDetail(props) {
                 fetch(`${API_URL}movie/${movieID}/credits?api_key=${API_KEY}`)
                     .then(response => response.json())
                     .then(response => {
-                        console.log(response);
                         setCrew(response.cast);
                     })
             })
@@ -37,12 +36,12 @@ function MovieDetail(props) {
     return (
         <div>
             {Movie && 
-                <MainImage image={`${IMAGE_URL}w1280${Movie.backdrop_path && Movie.backdrop_path}`} title={Movie.original_title} text={Movie.overview} />
+                <MainImage image={`${IMAGE_URL}${BACKDROP_SIZE}${Movie.backdrop_path}`} title={Movie.original_title} text={Movie.overview} />
             }
 
             <div style={{width:'85%', margin:'1rem auto'}}>
                 <div style={{display:'flex', justifyContent:'flex-end'}}>
-                    <Favorite userFrom={localStorage.getItem.user('userId')} movieID={movieID} movieInfo={Movie}/>
+                    <Favorite userFrom={localStorage.getItem('userId')} movieID={movieID} movieInfo={Movie}/>
                 </div>
 
                 <Descriptions title="Movie informations" bordered='true'>

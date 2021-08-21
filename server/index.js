@@ -3,22 +3,34 @@ const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./config/key');
-const {User} = require('./models/user');
-const {auth} = require('./middleware/auth');
+const path = require("path");
+//const {User} = require('./models/user');
+//const {auth} = require('./middleware/auth');
 
 
 mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true,  useFindAndModify: false })
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.error(err));
 
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 mongoose.set('useCreateIndex', true);
 
+app.use('/api/users', require('./routes/users'));
+app.use('/api/favorite', require('./routes/favorite'));
+app.use('/uploads', express.static('uploads'));
 
-app.get('/api/users/auth', auth, (req, res) => {
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
+
+
+/*app.get('/api/users/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req._id,
         isAdmin: req.user.role === 0 ? false : true,
@@ -71,7 +83,7 @@ app.get('/api/users/logout', auth, (req, res) => {
         if(err) return res.json({success: false, err});
         return res.status(200).send({success: true});
     })
-})
+})*/
 
 
 const port = process.env.PORT || 5000

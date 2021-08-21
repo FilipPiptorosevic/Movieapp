@@ -59,7 +59,6 @@ function HomePage() {
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <button onClick={handleClick}>Load more</button>
                 </div>
-
             </div>
         </div>
     )
