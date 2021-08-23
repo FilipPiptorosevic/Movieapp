@@ -19,7 +19,7 @@ function Comments(props) {
         e.preventDefault();
 
         if (user.userData && !user.userData.isAuth) {
-            return alert('Please Log in first');
+            return alert('Please Log in first.');
         }
 
         const variables = {

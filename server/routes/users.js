@@ -15,6 +15,7 @@ app.get('/auth', auth, (req, res) => {
     });
 });
 
+
 app.post('/register', (req, res) => {
     const user = new User(req.body);
 
@@ -27,6 +28,7 @@ app.post('/register', (req, res) => {
         });
     });
 });
+
 
 app.post('/login', (req, res) => {
 
@@ -50,6 +52,7 @@ app.post('/login', (req, res) => {
     });
 })
 
+
 app.get('/logout', auth, (req, res) => {
 
     User.findOneAndUpdate({_id: req.user._id}, {token: "", tokenExp: ""}, (err, doc) => {
@@ -57,5 +60,6 @@ app.get('/logout', auth, (req, res) => {
         return res.status(200).send({success: true, doc});
     })
 })
+
 
 module.exports = app;

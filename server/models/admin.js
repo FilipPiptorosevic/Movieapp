@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-const userSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     name: {
         type: String,
         maxlength: 50
@@ -19,11 +19,11 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        minlength: 5
+        minlength: 5,
     },
     role: {
         type: Number,
-        default: 0
+        default: 1
     },
     token: {
         type: String
@@ -33,17 +33,16 @@ const userSchema = mongoose.Schema({
     }
 });
 
-
-userSchema.pre('save', function( next ) {
-    var user = this;
+adminSchema.pre('save', function( next ) {
+    var admin = this;
     
-    if(user.isModified('password')){    
+    if(admin.isModified('password')){    
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err);
     
-            bcrypt.hash(user.password, salt, function(err, hash){
+            bcrypt.hash(admin.password, salt, function(err, hash){
                 if(err) return next(err);
-                user.password = hash 
+                admin.password = hash 
                 next()
             })
         })
@@ -52,35 +51,35 @@ userSchema.pre('save', function( next ) {
     }
 });
 
-userSchema.methods.comparePassword = function(plainPassword, callb) {
+adminSchema.methods.comparePassword = function(plainPassword, callb) {
     bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
         if(err) return callb(err);
         callb(null, isMatch);
     });
 }
 
-userSchema.methods.generateToken = function(callb) {
-    var user = this;
-    var token = jwt.sign(user._id.toHexString(), 'secret');
+adminSchema.methods.generateToken = function(callb) {
+    var admin = this;
+    var token = jwt.sign(admin._id.toHexString(), 'secret');
 
-    user.token = token;
-    user.save(function (err, user) {
+    admin.token = token;
+    admin.save(function (err, user) {
         if(err) return callb(err);
-        callb(null, user);
+        callb(null, admin);
     })
 }
 
-userSchema.statics.findByToken = function(token, callb) {
-    var user = this;
+adminSchema.statics.findByToken = function(token, callb) {
+    var admin = this;
 
     jwt.verify(token, 'secret', function(err, decode){
-        user.findOne({"_id":decode, "token":token}, function(err, user) {
+        admin.findOne({"_id":decode, "token":token}, function(err, admin) {
             if(err) return callb(err);
-            callb(null, user);
+            callb(null, admin);
         })
     })
 
 }
 
-const User = mongoose.model('User', userSchema);
-module.exports = {User};
+const Admin = mongoose.model('Admin', adminSchema);
+module.exports = {Admin};
