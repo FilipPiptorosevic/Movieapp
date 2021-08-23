@@ -19,6 +19,8 @@ mongoose.set('useCreateIndex', true);
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/favorite', require('./routes/favorite'));
+app.use('/api/comment' , require('./routes/comment'));
+app.use('/api/like', require('./routes/like'));
 app.use('/uploads', express.static('uploads'));
 
 if(process.env.NODE_ENV === 'production') {
@@ -87,6 +89,7 @@ app.get('/api/users/logout', auth, (req, res) => {
 
 
 const port = process.env.PORT || 5000
+
 
 app.listen(port, () => {
     console.log('Server running at port ' + port);

@@ -72,7 +72,7 @@ function Favorite(props) {
 
     return (
         <div>
-            <Button onClick={addRemoveFavorite}>{!Favorited ? "Add to Favorites " : "Remove from Favorites "}{FavoriteNumber}</Button>
+            <Button onClick={addRemoveFavorite}>{!Favorited || (user.userData && !user.userData.isAuth) ? "Add to Favorites " : "Remove from Favorites "}{FavoriteNumber}</Button>
         </div>
     );
 }

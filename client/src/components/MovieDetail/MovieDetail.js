@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {API_URL, API_KEY, IMAGE_URL, BACKDROP_SIZE } from '../config';
 import MainImage from '../homepage/sections/MainImage'
 import 'antd/dist/antd.css';
 import { Descriptions, Button, Row } from 'antd';
 import GridCard from '../homepage/sections/GridCard';
-import  Favorite from './Favorite';
+import Favorite from './Favorite';
+import Comments from './Comments';
+import LikeDislike from './LikeDislike';
+
 
 function MovieDetail(props) {
 
+    const movieID = props.match.params.movieID;
     const [Movie, setMovie] = useState([]);
     const [Crew, setCrew] = useState([]);
     const [ActorToggle, setActorToggle] = useState(false);
-    const movieID = props.match.params.movieID;
+    const [CommentLists, setCommentLists] = useState([]);
+    const movieVariable = {
+        movieID: movieID
+    }
 
     useEffect(() => {
 
@@ -26,11 +34,28 @@ function MovieDetail(props) {
                     .then(response => {
                         setCrew(response.cast);
                     })
+
             })
+
+
+            axios.post('/api/comment/getComments', movieVariable)
+            .then(response => {
+                if (response.data.success) {
+                    setCommentLists(response.data.comments)
+                } else {
+                    alert('Failed to get comments Info')
+                }
+            })
+
+        
     }, [])
 
     const handleClick = () => {
         setActorToggle(!ActorToggle);
+    }
+
+    const updateComment = (newComment) => {
+        setCommentLists(CommentLists.concat(newComment));
     }
 
     return (
@@ -55,6 +80,7 @@ function MovieDetail(props) {
                     <Descriptions.Item label="Popularity">{Movie.popularity}</Descriptions.Item>
                 </Descriptions>
 
+                <br />
                 <div style={{display:'flex', justifyContent:'center'}}>
                     <Button onClick={handleClick}>Toogle Actor View</Button>
                 </div>
@@ -68,6 +94,12 @@ function MovieDetail(props) {
                     ))}
                 </Row>
                 }
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <LikeDislike movie movieID={movieID} userID={localStorage.getItem('userId')} />
+                </div>
+
+                <Comments CommentLists={CommentLists} postID={movieID} refreshFunction={updateComment}/>
 
             </div>
         </div>
