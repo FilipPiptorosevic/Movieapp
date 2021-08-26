@@ -50,7 +50,7 @@ function SingleComment(props) {
         <div>
             <Comment 
                 actions={action}
-                author={props.comment.writer.name}
+                author={props.comment.writer.name + ' ' + props.comment.writer.lastname}
                 content={
                     <p>
                         {props.comment.content}

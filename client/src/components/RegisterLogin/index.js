@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/user_actions';
 import { Link } from "react-router-dom";
+import { Button, Input, Typography, Form } from 'antd';
 
 class RegisterLogin extends Component {
 
@@ -50,21 +51,25 @@ class RegisterLogin extends Component {
 
     render() {
         return (
-            <div className="container" style={{backgroundColor: "rgb(251, 238, 193)", borderRadius: "5%"}}>
-                <h2>Log In</h2>
-                <div className="row" style={{backgroundColor:"white"}}>
-                    <form className="col s6">
+            <div className="container" style={{backgroundColor: 'lavender'}}>
+                <br />
+                <br />
+                <br />
+                <h1 align="middle">Log In</h1>
+                <div className="row" type="flex" justify="center" align="middle" style={{height: '100vh'}}>
+                    <Form className="col s6" style={{backgroundColor:'honeydew'}}>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input
+                                <Typography className="active" htmlFor="email">Email</Typography>
+                                <Input
                                     name = "email"
                                     value = {this.state.email}
                                     onChange = {e => this.handleChange(e)}
                                     id = "email"
                                     type = "email"
                                     className = "validate"
+                                    style={{width:'30%'}}
                                 />
-                                <label className="active" htmlFor="email">Email</label>
                                 <span 
                                     className="helper-text"
                                     data-error="Type a right email type"
@@ -74,15 +79,16 @@ class RegisterLogin extends Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input
+                                <Typography className="active" htmlFor="password">Password</Typography>
+                                <Input
                                     name = "password"
                                     value = {this.state.password}
                                     onChange = {e => this.handleChange(e)}
                                     id = "password"
                                     type = "password"
                                     className = "validate"
+                                    style={{width:'30%'}}
                                 />
-                                <label className="active" htmlFor="password">Password</label>
                                 <span 
                                     className="helper-text"
                                     data-error="Wrong"
@@ -99,26 +105,26 @@ class RegisterLogin extends Component {
 
                         <div className="row">
                             <div className="col 12">
-                                <button
+                                <Button
                                     className="btn waves-effect red lighten-2"
                                     type="submit"
                                     name="action"
                                     onClick={this.submitForm}
                                 >
                                     Log In
-                                </button>&nbsp; &nbsp;
+                                </Button>&nbsp; &nbsp;
                                 <Link to="/register">
-                                    <button
+                                    <Button
                                         className="btn waves-effect green lighten-2"
                                         type="submit"
                                         name="action"
                                     >
                                         Sign Up
-                                    </button>
+                                    </Button>
                                 </Link>
                             </div>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
         );

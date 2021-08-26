@@ -30,6 +30,15 @@ app.post("/getComments", (req, res) => {
     })
 });
 
+app.post('/removeComment', (req, res) => {
+
+    Favorite.findOneAndDelete({postID: req.body.postID, writer: req.body.writer, commentID})
+        .exec((err, doc) => {
+            if(err) return res.status(400).json({success: false, err});
+            return res.status(200).json({success: true, doc});
+        })
+});
+
 
 
 module.exports = app;

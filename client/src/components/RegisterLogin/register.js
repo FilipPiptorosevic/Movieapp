@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { registerUser } from '../../actions/user_actions';
 import { connect } from 'react-redux';
+import { Button, Input, Typography, Form } from 'antd';
 
 export class Register extends Component {
 
@@ -85,42 +86,45 @@ export class Register extends Component {
     }
     render() {
         return (
-            <div className="container">
-            <h2>Sign Up</h2>
-            <div className="row">
-                <form className="col s12">
+            <div className="container" style={{backgroundColor:'lavender'}}>
+            <br />
+            <br />
+            <br />
+            <h1 align="middle">Sign Up</h1>
+            <div className="row" type="flex" justify="center" align="middle" style={{height: '100vh'}}>
+                <Form className="col s12" style={{backgroundColor:'honeydew'}}>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input
-                                name = "lastname"
-                                value = {this.state.lastname}
-                                onChange = {e => this.handleChange(e)}
-                                id = "lastname"
-                                type = "text"
-                                className = "validate"
-                            />
-                            <label className="active" htmlFor="lastname">lastname</label>
-                            <span 
-                                className="helper-text"
-                                data-error="Type a right email type"
-                                data-success="Right"
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input
+                            <Typography className="active" htmlFor="name">Name</Typography>
+                            <Input
                                 name = "name"
                                 value = {this.state.name}
                                 onChange = {e => this.handleChange(e)}
                                 id = "name"
                                 type = "text"
                                 className = "validate"
+                                style={{width:'30%'}}
                             />
-                            <label className="active" htmlFor="name">name</label>
                             <span 
                                 className="helper-text"
-                                data-error="Wrong"
+                                data-success="Right"
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <Typography className="active" htmlFor="lastname">Lastname</Typography>
+                            <Input
+                                name = "lastname"
+                                value = {this.state.lastname}
+                                onChange = {e => this.handleChange(e)}
+                                id = "lastname"
+                                type = "text"
+                                className = "validate"
+                                style={{width:'30%'}}
+                            />
+                            <span 
+                                className="helper-text"
                                 data-success="Right"
                             />
                         </div>
@@ -128,15 +132,16 @@ export class Register extends Component {
 
                     <div className="row">
                         <div className="input-field col s12">
-                            <input
+                            <Typography className="active" htmlFor="email">Email</Typography>
+                            <Input
                                 name = "email"
                                 value = {this.state.email}
                                 onChange = {e => this.handleChange(e)}
                                 id = "email"
                                 type = "email"
                                 className = "validate"
+                                style={{width:'30%'}}
                             />
-                            <label className="active" htmlFor="email">email</label>
                             <span 
                                 className="helper-text"
                                 data-error="Wrong"
@@ -147,29 +152,31 @@ export class Register extends Component {
 
                     <div className="row">
                             <div className="input-field col s12">
-                                <input
+                                <Typography htmlFor="password">Password</Typography>
+                                <Input
                                     name = "password"
                                     value = {this.state.password}
                                     onChange = {e => this.handleChange(e)}
                                     id = "password"
                                     type = "password"
                                     className = "validate"
+                                    style={{width:'30%'}}
                                 />
-                                <label htmlFor="password">Password</label>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="input-field col s12">
-                                <input
+                                <Typography htmlFor="passwordConfirmation">Password confirmation</Typography>
+                                <Input
                                     name = "passwordConfirmation"
                                     value = {this.state.passwordConfirmation}
                                     onChange = {e => this.handleChange(e)}
                                     id = "passwordConfirmation"
                                     type = "password"
                                     className = "validate"
+                                    style={{width:'30%'}}
                                 />
-                                <label htmlFor="passwordConfirmation">Password confirmation</label>
                             </div>
                         </div>
 
@@ -179,19 +186,21 @@ export class Register extends Component {
                             </div>
                         )}
 
+                        <br />
+
                     <div className="row">
                         <div className="col 12">
-                            <button
+                            <Button
                                 className="btn waves-effect red lighten-2"
                                 type="submit"
                                 name="action"
                                 onClick={this.submitForm}
                             >
                                 Create an account
-                            </button>
+                            </Button>
                         </div>
                     </div>
-                </form>
+                </Form>
             </div>
         </div>
         );

@@ -6,6 +6,7 @@ import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 const { TextArea } = Input;
 
+
 function Comments(props) {
 
     const user = useSelector(state => state.user)
@@ -38,6 +39,7 @@ function Comments(props) {
                 }
             })
     }
+
 
     return (
         <div>

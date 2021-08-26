@@ -37,7 +37,6 @@ function MovieDetail(props) {
 
             })
 
-
             axios.post('/api/comment/getComments', movieVariable)
             .then(response => {
                 if (response.data.success) {
@@ -46,7 +45,7 @@ function MovieDetail(props) {
                     alert('Failed to get comments Info')
                 }
             })
-
+            
         
     }, [])
 
@@ -57,6 +56,7 @@ function MovieDetail(props) {
     const updateComment = (newComment) => {
         setCommentLists(CommentLists.concat(newComment));
     }
+
 
     return (
         <div>
