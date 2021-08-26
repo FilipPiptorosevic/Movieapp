@@ -11,7 +11,7 @@ export class Register extends Component {
         email: "",
         password: "",
         passwordConfirmation: "",
-        errors: []
+        errors: ""
     };
 
     handleChange = event => {
@@ -19,8 +19,8 @@ export class Register extends Component {
     }
 
     displayErrors = errors => 
-        errors.map((error, i) => <p id="err" key={i}>{error}</p>);
-    
+        <p style={{color:'red'}}>{errors}</p>
+        
 
     isFormEmpty = ({ lastname, name, email, password, passwordConfirmation }) => {
         return (
@@ -33,13 +33,11 @@ export class Register extends Component {
     }
 
     isValidForm = () => {
-        this.setState({errors: []});
-
 
         if(this.isFormEmpty(this.state)) {
-            this.setState({errors: this.state.errors.concat("Fill in all fields.")});
+            this.setState({errors: "Fill in all fields."});
         } else if (!this.isValidPassword(this.state)) {
-            this.setState({errors: this.state.errors.concat("Invalid password.")});
+            this.setState({errors: "Invalid password."});
         } else {
             return true;
         }
@@ -67,18 +65,17 @@ export class Register extends Component {
         };
 
         if(this.isValidForm()) {
-            this.setState({errors: []});
 
             this.props.dispatch(registerUser(dataToSubmit))
             .then(response => {
                 if(response.payload.success) {
                     this.props.history.push('/login');
                 } else {
-                    this.setState({errors: this.state.errors.concat("Failed to register.")});
+                    this.setState({errors: "Failed to register."});
                 }
             })
             .catch(err => {
-                this.setState({errors: this.state.errors.concat(err)});
+                this.setState({errors: err});
             });
         } else {
             console.log("Form is not valid");

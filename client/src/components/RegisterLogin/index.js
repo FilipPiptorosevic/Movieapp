@@ -9,7 +9,7 @@ class RegisterLogin extends Component {
     state = {
         email: "",
         password: "",
-        errors: []
+        errors: ""
     };
 
     handleChange = event => {
@@ -19,7 +19,7 @@ class RegisterLogin extends Component {
     isValidForm = ({email, password}) => email && password;
 
     displayErrors = errors => 
-        errors.map((error, i) => <p key={i}>{error}</p>)
+        <p style={{color:'red'}}>{errors}</p>
 
     submitForm = event => {
         event.preventDefault();
@@ -31,20 +31,18 @@ class RegisterLogin extends Component {
 
         if(this.isValidForm(this.state)) {
            
-            this.setState({errors: []});
-
             this.props.dispatch(loginUser(dataToSubmit))
             .then(response => {
                 if(response.payload.loginSuccess){
                     localStorage.setItem('userId', response.payload.userId);
                     this.props.history.push('/');
                 } else {
-                    this.setState({errors: this.state.errors.concat("Failed to log in, check email or password.")});
+                    this.setState({errors: "Failed to log in, check email or password."});
                 }
             })
                
         } else {
-            this.setState({errors: this.state.errors.concat("Form is not valid.")});
+            this.setState({errors: "Fill in all fields."});
         }
 
     }
