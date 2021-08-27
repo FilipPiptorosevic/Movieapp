@@ -10,7 +10,6 @@ function SingleComment(props) {
     const[CommentValue, setCommentValue] = useState("");
     const[OpenReply, setOpenReply] = useState(false);
 
-
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
     }
@@ -41,9 +40,28 @@ function SingleComment(props) {
             })
     }
 
+    const deleteComment = (e) => {
+        e.preventDefault();
+
+        const variables = {
+            _id: props.comment._id
+        }
+
+        axios.post('/api/comment/removeComment', variables)
+        .then(response => {
+            if(response.data.success) {
+                props.removeComment(response.data.comment);
+            } else {
+                alert('Failed to remove comment');
+            }
+        })
+    }
+
     const action = [
         <LikeDislike comment commentID={props.comment._id} userID={localStorage.getItem('userId')} />,
-        <span onClick={openReply} key='basicReplyTo'>Reply to</span>
+        <span onClick={openReply} key='basicReplyTo'>Reply to</span>,
+        (user.userData && user.userData.isAdmin) && <span onClick={deleteComment}>Delete</span>
+
     ]
 
     return (
@@ -57,11 +75,10 @@ function SingleComment(props) {
                     </p>
                 }
             ></Comment>
-
         {OpenReply && 
             <form style={{display: 'flex'}} onSubmit={onSubmit}>
             <TextArea
-                style={{width: '100%', borderRadius:'5px'}}
+                style={{width: '100%', borderRadius:'5px', marginLeft:'20px'}}
                 onChange={handleChange}
                 value={CommentValue}
                 placeholder="Write here..."                

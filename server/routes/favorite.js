@@ -51,7 +51,6 @@ app.post('/removeFromFavorite', (req, res) => {
 });
 
 app.post('/getFavorites', (req, res) => {
-
     
     Favorite.find({'userFrom': req.body.userFrom})
         .exec((err, favorites) => {

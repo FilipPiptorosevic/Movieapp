@@ -38,7 +38,6 @@ function FavoritePage() {
                         alert('Failed to remove from Favorites');
                     }
                 })
-
     }
 
     const renderBody = FavoritedMovies.map((movie, index) => {

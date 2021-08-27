@@ -14,8 +14,8 @@ app.post("/saveComment", auth, (req, res) => {
         Comment.find({'_id': comment._id})
         .populate('writer')
         .exec((err, result) => {
-            if(err) return res.json({success: false, err});
-            return res.status(200).json({success: true, result});
+            if(err)return res.json({success: false, err});
+            return res.status(200).json({success: true, result}); 
         })
     })
 });
@@ -30,13 +30,14 @@ app.post("/getComments", (req, res) => {
     })
 });
 
-app.post('/removeComment', (req, res) => {
+app.post("/removeComment", (req, res) => {
 
-    Favorite.findOneAndDelete({postID: req.body.postID, writer: req.body.writer, commentID})
-        .exec((err, doc) => {
+    Comment.findOneAndDelete({_id: req.body._id})
+        .exec((err, comment) => {
             if(err) return res.status(400).json({success: false, err});
-            return res.status(200).json({success: true, doc});
+            return res.status(200).json({success: true, comment});
         })
+
 });
 
 

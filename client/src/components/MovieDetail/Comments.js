@@ -9,7 +9,8 @@ const { TextArea } = Input;
 
 function Comments(props) {
 
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user);
+    const removeComment = props.updateRemovedComment;
     const [Comment, setComment] = useState("");
 
     const handleChange = (e) => {
@@ -51,10 +52,12 @@ function Comments(props) {
              props.CommentLists.map((comment, index) => (
                  (!comment.responseTo && 
                     <React.Fragment>
-                     <SingleComment comment={comment} postID={props.postID} refreshFunction={props.refreshFunction}/>
-                     <ReplyComment CommentLists={props.CommentLists} postID={props.postID} refreshFunction={props.refreshFunction} parentCommentID={comment._id} />
+                     <SingleComment comment={comment} postID={props.postID} refreshFunction={props.refreshFunction} removeComment={removeComment} />
+                     <ReplyComment CommentLists={props.CommentLists} postID={props.postID} refreshFunction={props.refreshFunction} parentCommentID={comment._id} removeComment={removeComment}/>
                  </React.Fragment>)
              ))}
+
+             <br />
 
             <form style={{display: 'flex'}} onSubmit={onSubmit}>
                 <TextArea

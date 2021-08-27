@@ -6,9 +6,13 @@ const commentSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    commentID: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    },
     postID: {
         type: String
-     },
+    },
     responseTo: {
         type: Schema.Types.ObjectId,
         ref: 'User'

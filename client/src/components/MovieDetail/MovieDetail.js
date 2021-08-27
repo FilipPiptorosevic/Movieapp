@@ -41,6 +41,7 @@ function MovieDetail(props) {
             .then(response => {
                 if (response.data.success) {
                     setCommentLists(response.data.comments)
+                    console.log(CommentLists);
                 } else {
                     alert('Failed to get comments Info')
                 }
@@ -55,6 +56,13 @@ function MovieDetail(props) {
 
     const updateComment = (newComment) => {
         setCommentLists(CommentLists.concat(newComment));
+    }
+
+    const updateRemovedComment = (removedComment) => {
+        /*let index = CommentLists.indexOf(removedComment);
+        CommentLists.splice(index, 1);
+        setCommentLists(CommentLists);*/
+        console.log(CommentLists.indexOf(removedComment));
     }
 
 
@@ -89,7 +97,7 @@ function MovieDetail(props) {
                     <Row gutter={[16, 16]}>
                     {Crew && Crew.map((crew, index) => (
                         <React.Fragment key={index}>
-                            {crew.profile_path && <GridCard actor image={`${IMAGE_URL}w500${crew.profile_path}`}/>}
+                            {crew.profile_path && <GridCard actor image={`${IMAGE_URL}w500${crew.profile_path}`} name={crew.name}/>}
                         </React.Fragment>
                     ))}
                 </Row>
@@ -99,7 +107,7 @@ function MovieDetail(props) {
                     <LikeDislike movie movieID={movieID} userID={localStorage.getItem('userId')} />
                 </div>
 
-                <Comments CommentLists={CommentLists} postID={movieID} refreshFunction={updateComment}/>
+                <Comments CommentLists={CommentLists} postID={movieID} refreshFunction={updateComment} updateRemovedComment={updateRemovedComment}/>
 
             </div>
         </div>

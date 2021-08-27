@@ -83,8 +83,9 @@ function HomePage() {
   
                 <Row gutter={[16, 16]}>
                     {Movies && Movies.map((movie, index) => (
+                    movie.poster_path && 
                     <React.Fragment key={index}>
-                        <GridCard image={movie.poster_path && `${IMAGE_URL}w500${movie.poster_path}`} movieID={movie.id} />
+                        <GridCard image={movie.poster_path && `${IMAGE_URL}w500${movie.poster_path}`} movieID={movie.id} title={movie.title} />
                     </React.Fragment>
                     ))}
                 </Row>
