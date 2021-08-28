@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/user_actions';
-import { Link } from "react-router-dom";
 import { Button, Input, Typography, Form } from 'antd';
 
 class RegisterLogin extends Component {
@@ -101,6 +100,7 @@ class RegisterLogin extends Component {
                             </div>
                         )}
 
+                        <br />
                         <div className="row">
                             <div className="col 12">
                                 <Button
@@ -110,16 +110,7 @@ class RegisterLogin extends Component {
                                     onClick={this.submitForm}
                                 >
                                     Log In
-                                </Button>&nbsp; &nbsp;
-                                <Link to="/register">
-                                    <Button
-                                        className="btn waves-effect green lighten-2"
-                                        type="submit"
-                                        name="action"
-                                    >
-                                        Sign Up
-                                    </Button>
-                                </Link>
+                                </Button>
                             </div>
                         </div>
                     </Form>

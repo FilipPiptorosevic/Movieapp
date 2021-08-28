@@ -42,19 +42,19 @@ function SingleComment(props) {
 
     const deleteComment = (e) => {
         e.preventDefault();
-
-        const variables = {
-            _id: props.comment._id
-        }
-
-        axios.post('/api/comment/removeComment', variables)
-        .then(response => {
-            if(response.data.success) {
-                props.removeComment(response.data.comment);
-            } else {
-                alert('Failed to remove comment');
+               const variables = {
+                _id: props.comment._id
             }
-        })
+    
+            axios.post('/api/comment/removeComment', variables)
+            .then(response => {
+                if(response.data.success) {
+                    props.removeComment();
+                } else {
+                    alert('Failed to remove comment');
+                }
+            })
+
     }
 
     const action = [

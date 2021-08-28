@@ -41,7 +41,6 @@ function MovieDetail(props) {
             .then(response => {
                 if (response.data.success) {
                     setCommentLists(response.data.comments)
-                    console.log(CommentLists);
                 } else {
                     alert('Failed to get comments Info')
                 }
@@ -58,19 +57,25 @@ function MovieDetail(props) {
         setCommentLists(CommentLists.concat(newComment));
     }
 
-    const updateRemovedComment = (removedComment) => {
-        /*let index = CommentLists.indexOf(removedComment);
-        CommentLists.splice(index, 1);
-        setCommentLists(CommentLists);*/
-        console.log(CommentLists.indexOf(removedComment));
+    const updateRemovedComment = () => {
+
+        axios.post('/api/comment/getComments', movieVariable)
+            .then(response => {
+                if (response.data.success) {
+                    setCommentLists(response.data.comments)
+                } else {
+                    alert('Failed to get comments Info')
+                }
+            })
     }
 
 
     return (
-        <div>
-            {Movie && 
-                <MainImage image={`${IMAGE_URL}${BACKDROP_SIZE}${Movie.backdrop_path}`} title={Movie.original_title} text={Movie.overview} />
-            }
+        <div style={{width: '100%', margin: '0'}}>
+
+            {Movie &&
+                <MainImage image={`${IMAGE_URL}w1280${Movie.backdrop_path && Movie.backdrop_path}`} title={Movie.original_title} text={Movie.overview} />
+            } 
 
             <div style={{width:'85%', margin:'1rem auto'}}>
                 <div style={{display:'flex', justifyContent:'flex-end'}}>
@@ -80,8 +85,8 @@ function MovieDetail(props) {
                 <Descriptions title="Movie informations" bordered='true'>
                     <Descriptions.Item label="Title">{Movie.original_title}</Descriptions.Item>
                     <Descriptions.Item label="Release date">{Movie.release_date}</Descriptions.Item>
-                    <Descriptions.Item label="Revenue">{Movie.revenue}</Descriptions.Item>
-                    <Descriptions.Item label="Runtime">{Movie.runtime}</Descriptions.Item>
+                    <Descriptions.Item label="Revenue">{Movie.revenue} $</Descriptions.Item>
+                    <Descriptions.Item label="Runtime">{Movie.runtime} min</Descriptions.Item>
                     <Descriptions.Item label="Average vote">{Movie.vote_average}</Descriptions.Item>
                     <Descriptions.Item label="Vote count">{Movie.vote_count}</Descriptions.Item>
                     <Descriptions.Item label="Status">{Movie.status}</Descriptions.Item>
