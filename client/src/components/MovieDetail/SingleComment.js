@@ -11,7 +11,7 @@ function SingleComment(props) {
     const[OpenReply, setOpenReply] = useState(false);
 
     const handleChange = (e) => {
-        setCommentValue(e.currentTarget.value)
+        setCommentValue(e.currentTarget.value);
     }
 
     const openReply = () => {
@@ -25,7 +25,7 @@ function SingleComment(props) {
             content: CommentValue,
             writer: user.userData._id,
             postID: props.postID,
-            responseTo: props.comment._id
+            responseTo: props.comment._id,
         }
 
         axios.post('/api/comment/saveComment', variables)
@@ -40,11 +40,11 @@ function SingleComment(props) {
             })
     }
 
-    const deleteComment = (e) => {
-        e.preventDefault();
-               const variables = {
-                _id: props.comment._id
-            }
+    const deleteComment = () => {
+
+        const variables = {
+            _id: props.comment._id,
+        }
     
             axios.post('/api/comment/removeComment', variables)
             .then(response => {
@@ -55,12 +55,32 @@ function SingleComment(props) {
                 }
             })
 
+
+    }
+
+    const removeChild = () => {
+
+        const variables = {
+            responseTo: props.comment._id
+        }
+
+        axios.post('/api/comment/removeChildComment', variables)
+        .then(response => {
+            if(response.data.success) {
+                props.removeComment();
+            } else {
+                alert('Failed to remove comment');
+            }
+        })
     }
 
     const action = [
         <LikeDislike comment commentID={props.comment._id} userID={localStorage.getItem('userId')} />,
         <span onClick={openReply} key='basicReplyTo'>Reply to</span>,
-        (user.userData && user.userData.isAdmin) && <span onClick={deleteComment}>Delete</span>
+        (user.userData && user.userData.isAdmin) && <span onClick={() => {
+            deleteComment();
+            removeChild();
+        }}>Delete</span>
 
     ]
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import SingleComment from './SingleComment';
-import axios from 'axios';
-
 
 function ReplyComment(props) {
 
@@ -18,27 +16,9 @@ function ReplyComment(props) {
         })
 
         setChildCommentNumber(commentNumber);
-
-        
-        //removeChild();
         
     }, [props.CommentLists, props.parentCommentID])
 
-    const removeChild = () => {
-
-        const variables = {
-            responseTo: props.parentCommentID
-        }
-
-        axios.post('/api/comment/removeChildComment', variables)
-        .then(response => {
-            if(response.data.success) {
-                props.removeComment();
-            } else {
-                alert('Failed to remove comment');
-            }
-        })
-    }
 
     let renderReplyComment = (parentCommentID) => 
             props.CommentLists.map((comment, index) => (

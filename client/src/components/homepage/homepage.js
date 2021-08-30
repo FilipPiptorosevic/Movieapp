@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {API_URL, API_KEY, IMAGE_URL} from '../config';
 import 'antd/dist/antd.css';
-import { Typography, Row } from 'antd';
+import { Typography, Row, Button } from 'antd';
 import MainImage from './sections/MainImage';
 import GridCard from './sections/GridCard';
 import SearchMovie from './sections/SearchMovie';
@@ -94,7 +94,7 @@ function HomePage() {
 
                 <br />
                 <div style={{display: "flex", justifyContent: "center"}}>
-                    <button onClick={handleClick}>Load more</button>
+                    <Button onClick={handleClick}>Load more</Button>
                 </div>
             </div>
         </div>

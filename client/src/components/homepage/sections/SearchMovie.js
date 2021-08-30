@@ -17,7 +17,7 @@ function SearchMovie(props) {
             <Search
                 value={SearchType}
                 onChange={onChangeSearch}
-                placeholder = "Search..."
+                placeholder = "Search by title..."
             />
         </div>
     );
