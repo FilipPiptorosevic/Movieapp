@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {API_URL, API_KEY, IMAGE_URL, BACKDROP_SIZE } from '../config';
+import {API_URL, API_KEY, IMAGE_URL } from '../config';
 import MainImage from '../homepage/sections/MainImage'
 import 'antd/dist/antd.css';
 import { Descriptions, Button, Row } from 'antd';
@@ -40,7 +40,8 @@ function MovieDetail(props) {
             axios.post('/api/comment/getComments', movieVariable)
             .then(response => {
                 if (response.data.success) {
-                    setCommentLists(response.data.comments)
+                    setCommentLists(response.data.comments);
+                    console.log(response.data.comments);
                 } else {
                     alert('Failed to get comments Info')
                 }
@@ -67,11 +68,16 @@ function MovieDetail(props) {
                     alert('Failed to get comments Info')
                 }
             })
+
+        
     }
 
 
     return (
         <div style={{width: '100%', margin: '0'}}>
+
+            <br />
+            <br />
 
             {Movie &&
                 <MainImage image={`${IMAGE_URL}w1280${Movie.backdrop_path && Movie.backdrop_path}`} title={Movie.original_title} text={Movie.overview} />

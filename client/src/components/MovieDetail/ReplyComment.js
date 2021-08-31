@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SingleComment from './SingleComment';
+import axios from 'axios';
 
 function ReplyComment(props) {
 
@@ -21,11 +22,11 @@ function ReplyComment(props) {
 
 
     let renderReplyComment = (parentCommentID) => 
-            props.CommentLists.map((comment, index) => (
+            props.CommentLists.map((comment) => (
                    <React.Fragment>
                        {comment.responseTo === parentCommentID && 
                             <div style={{width:'80%', marginLeft:'20px'}}>
-                                <SingleComment comment={comment} postID={props.postID} refreshFunction={props.refreshFunction} removeComment={props.removeComment}/>
+                                <SingleComment CommentLists={props.CommentLists} comment={comment} postID={props.postID} refreshFunction={props.refreshFunction} removeComment={props.removeComment}/>
                                 <ReplyComment CommentLists={props.CommentLists} postID={props.postID} refreshFunction={props.refreshFunction} parentCommentID={comment._id} removeComment={props.removeComment} />
                             </div>
                        }

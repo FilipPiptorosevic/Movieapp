@@ -25,10 +25,8 @@ function LikeDislikes(props) {
         Axios.post('/api/like/getLikes', variable)
             .then(response => {
                 if (response.data.success) {
-                    //How many likes does this video or comment have 
                     setLikes(response.data.likes.length)
 
-                    //if I already click this like button or not 
                     response.data.likes.map(like => {
                         if (like.userID === props.userID) {
                             setLikeAction('liked')
@@ -41,11 +39,9 @@ function LikeDislikes(props) {
 
         Axios.post('/api/like/getDislikes', variable)
             .then(response => {
-                if (response.data.success) {
-                    //How many likes does this video or comment have 
+                if (response.data.success) { 
                     setDislikes(response.data.dislikes.length)
-
-                    //if I already click this like button or not 
+ 
                     response.data.dislikes.map(dislike => {
                         if (dislike.userID === props.userID) {
                             setDislikeAction('disliked')
@@ -74,7 +70,6 @@ function LikeDislikes(props) {
                         setLikes(Likes + 1)
                         setLikeAction('liked')
 
-                        //If dislike button is already clicked
 
                         if (DislikeAction !== null) {
                             setDislikeAction(null)
@@ -136,7 +131,6 @@ function LikeDislikes(props) {
                         setDislikes(Dislikes + 1)
                         setDislikeAction('disliked')
 
-                        //If dislike button is already clicked
                         if(LikeAction !== null ) {
                             setLikeAction(null)
                             setLikes(Likes - 1)

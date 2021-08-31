@@ -42,8 +42,10 @@ function FavoritePage() {
 
     const renderBody = FavoritedMovies.map((movie, index) => {
 
+        var link = '/movie/' + movie.movieID;
+
         return <tr>
-            <td>{movie.movieTitle}</td>
+            <td><a style={{color:'black'}} href={link}>{movie.movieTitle}</a></td>
             <td>{movie.movieRunTime} min</td>
             <td><button onClick={() => removeOnClick(movie.movieID)}>Remove</button></td>
         </tr>

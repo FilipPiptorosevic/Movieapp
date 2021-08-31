@@ -42,14 +42,12 @@ app.post("/removeComment", (req, res) => {
 
 app.post("/removeChildComment", (req, res) => {
 
-    Comment.deleteMany({responseTo: req.body.responseTo})
+    Comment.findOneAndDelete({responseTo: req.body.responseTo})
         .exec((err, comment) => {
             if(err) return res.status(400).json({success: false, err});
             return res.status(200).json({success: true, comment});
         })
 
 });
-
-
 
 module.exports = app;

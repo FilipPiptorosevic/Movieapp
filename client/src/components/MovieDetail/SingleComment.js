@@ -40,10 +40,24 @@ function SingleComment(props) {
             })
     }
 
+    const deleteMapComment = () => {
+
+        props.CommentLists.map(comment => {
+            if(comment._id === props.comment._id) {
+                deleteComment();
+            }
+            if(comment.responseTo === props.comment._id) {
+                removeChild();
+            }
+        })
+
+
+    }
+
     const deleteComment = () => {
 
         const variables = {
-            _id: props.comment._id,
+            _id: props.comment._id
         }
     
             axios.post('/api/comment/removeComment', variables)
@@ -54,7 +68,6 @@ function SingleComment(props) {
                     alert('Failed to remove comment');
                 }
             })
-
 
     }
 
@@ -78,8 +91,7 @@ function SingleComment(props) {
         <LikeDislike comment commentID={props.comment._id} userID={localStorage.getItem('userId')} />,
         <span onClick={openReply} key='basicReplyTo'>Reply to</span>,
         (user.userData && user.userData.isAdmin) && <span onClick={() => {
-            deleteComment();
-            removeChild();
+            deleteMapComment();
         }}>Delete</span>
 
     ]

@@ -65,6 +65,8 @@ function HomePage() {
 
     return (
         <div style={{width: '100%', margin: '0'}}>
+            <br />
+            <br />
 
             {Movies[0] && 
                 <MainImage image={`${IMAGE_URL}w1280${Movies[0].backdrop_path && Movies[0].backdrop_path}`} title={Movies[0].original_title} text={Movies[0].overview} />
@@ -76,7 +78,6 @@ function HomePage() {
             </div>
             
 
-            {/*Body*/}
             <div style={{width: '85%', margin: '1rem auto'}}>
                 <Title level={2}>Movies by latest</Title>
                 <hr />
