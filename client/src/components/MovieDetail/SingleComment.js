@@ -91,7 +91,7 @@ function SingleComment(props) {
         <LikeDislike comment commentID={props.comment._id} userID={localStorage.getItem('userId')} />,
         <span onClick={openReply} key='basicReplyTo'>Reply to</span>,
         (user.userData && user.userData.isAdmin) && <span onClick={() => {
-            deleteMapComment();
+            deleteMapComment()
         }}>Delete</span>
 
     ]

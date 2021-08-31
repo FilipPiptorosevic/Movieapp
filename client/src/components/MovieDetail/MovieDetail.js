@@ -41,7 +41,6 @@ function MovieDetail(props) {
             .then(response => {
                 if (response.data.success) {
                     setCommentLists(response.data.comments);
-                    console.log(response.data.comments);
                 } else {
                     alert('Failed to get comments Info')
                 }
